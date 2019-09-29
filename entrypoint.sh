@@ -6,13 +6,13 @@ set -e
 # treat everything except -- as exec cmd
 [ "${1:0:2}" != "--" ] && exec "$@"
 
-if $MYSQL_AUTOCONF ; then
+if [ "$MYSQL_AUTOCONF" = "true" ] ; then
   if [ -z "$MYSQL_PORT" ]; then
       MYSQL_PORT=3306
   fi
-  [ -s "${MYSQL_PASSWORD_FILE}" ] && MYSQL_PASS="$(cat "${MYSQL_PASSWORD_FILE}")"
-  [ -s "${MYSQL_DATABASE_FILE}" ] && MYSQL_DB="$(cat "${MYSQL_DATABASE_FILE}")"
-  [ -s "${MYSQL_USER_FILE}" ] && MYSQL_USER="$(cat "${MYSQL_USER_FILE}")"
+  [ -s "${MYSQL_PASSWORD_FILE}" ] && export MYSQL_PASS="$(cat "${MYSQL_PASSWORD_FILE}")"
+  [ -s "${MYSQL_DATABASE_FILE}" ] && export MYSQL_DB="$(cat "${MYSQL_DATABASE_FILE}")"
+  [ -s "${MYSQL_USER_FILE}" ] && export MYSQL_USER="$(cat "${MYSQL_USER_FILE}")"
       
   # Set MySQL Credentials in pdns.conf
   sed -r -i "s/^[# ]*gmysql-host=.*/gmysql-host=${MYSQL_HOST}/g" /etc/pdns/pdns.conf
@@ -21,7 +21,7 @@ if $MYSQL_AUTOCONF ; then
   sed -r -i "s/^[# ]*gmysql-password=.*/gmysql-password=${MYSQL_PASS}/g" /etc/pdns/pdns.conf
   sed -r -i "s/^[# ]*gmysql-dbname=.*/gmysql-dbname=${MYSQL_DB}/g" /etc/pdns/pdns.conf
 
-  MYSQLCMD="mysql --host=${MYSQL_HOST} --user=${MYSQL_USER} --password=${MYSQL_PASS} --port=${MYSQL_PORT} -r -N"
+  MYSQLCMD="mysql --host=${MYSQL_HOST} --user=$MYSQL_USER --password=$MYSQL_PASS --port=${MYSQL_PORT} -r -N"
 
   # wait for Database come ready
   isDBup () {
