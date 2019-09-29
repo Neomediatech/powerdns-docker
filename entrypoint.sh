@@ -44,7 +44,7 @@ if [ "$MYSQL_AUTOCONF" = "true" ] ; then
   echo "CREATE DATABASE IF NOT EXISTS $MYSQL_DB;" | $MYSQLCMD
   MYSQLCMD="$MYSQLCMD $MYSQL_DB"
 
-  if [ "$(echo "SELECT COUNT(*) FROM information_schema.tables WHERE table_schema = \"$MYSQL_DB\";" | $MYSQLCMD)" -le 1 ]; then
+  if [ "$(echo "SELECT COUNT(*) FROM information_schema.tables WHERE table_schema = \"$MYSQL_DB\" AND table_name = \"domains\";" | $MYSQLCMD)" -le 1 ]; then
     echo Initializing Database
     cat /etc/pdns/schema.sql | $MYSQLCMD
   fi
@@ -52,9 +52,12 @@ if [ "$MYSQL_AUTOCONF" = "true" ] ; then
   unset -v MYSQL_PASS
 fi
 
+mkdir -p /etc/pdns/conf.d
+
 # Run pdns server
 trap "pdns_control quit" SIGHUP SIGINT SIGTERM
 
 pdns_server "$@" &
 
 wait
+
