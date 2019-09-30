@@ -26,7 +26,7 @@ RUN apk --update upgrade && \
 WORKDIR ${PDNS_HOME}
 
 ADD pdns.conf ${PDNS_HOME}/
-ADD schema.sql docker-entrypoint.sh /
+ADD docker-entrypoint.sh /
 RUN chmod +x /docker-entrypoint.sh
 
 RUN pdns_server --version || [ $? -eq 99 ]
