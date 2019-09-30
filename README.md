@@ -1,4 +1,4 @@
 # powerdns-docker
 PowerDNS based on Alpine, with MySQL/MariaDB support ￼
 
-Inspired by [psi-4ward](https://github.com/psi-4ward/docker-powerdns) and [tcely](https://github.com/tcely/dockerhub-powerdns) work
+This image depends on https://github.com/Neomediatech/dnsbl/tree/master/docker/stack stack. Database schema is run on db container, who runs other schemas (dnsbl and powerdns-admin)
