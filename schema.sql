@@ -1,3 +1,6 @@
+CREATE DATABASE IF NOT EXISTS `pdns` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `pdns`;
+
 CREATE TABLE IF NOT EXISTS domains (
   id                    INT AUTO_INCREMENT,
   name                  VARCHAR(255) NOT NULL,
