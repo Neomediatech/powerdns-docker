@@ -4,7 +4,7 @@ set -eu
 setup_backend() {
   local pdns_conf="${PDNS_HOME}/pdns.conf"
   local mysql_conf="${HOME}/.my.cnf"
-  local mysql_host="${DB_HOST:-powerdns}"
+  local mysql_host="${DB_HOST:-db}"
   local mysql_port="${DB_PORT:-3306}"
   local mysql_user=${DB_USER:-powerdns}
   local mysql_password=${DB_PASS:-powerdns}
