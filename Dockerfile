@@ -36,5 +36,6 @@ RUN chmod +x /entrypoint.sh
 
 RUN pdns_server --version || [ $? -eq 99 ]
 
-ENTRYPOINT ["/entrypoint.sh"]
+HEALTHCHECK --interval=1m --timeout=3s --start-period=10s CMD /usr/bin/pdns_control --config-dir=/etc/pfns rping || exit 1
+ENTRYPOINT ["/docker-entrypoint.sh"]
 
