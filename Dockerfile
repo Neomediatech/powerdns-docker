@@ -30,8 +30,8 @@ RUN apk --update upgrade && \
 
 ENV PAGER less
 
-ADD schema.sql pdns.conf /etc/pdns/
-ADD docker-entrypoint.sh /
+ADD pdns.conf /etc/pdns/
+ADD schema.sql docker-entrypoint.sh /
 RUN chmod +x /docker-entrypoint.sh
 
 RUN pdns_server --version || [ $? -eq 99 ]
