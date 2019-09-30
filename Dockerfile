@@ -3,12 +3,7 @@ FROM alpine
 ENV VERSION=4.1.11 \
     BUILD_DATE=2019-08-03 \
     TZ=Europe/Rome \
-    MYSQL_AUTOCONF=true \
-    MYSQL_HOST="mysql" \
-    MYSQL_PORT="3306" \
-    MYSQL_USER="root" \
-    MYSQL_PASS="root" \
-    MYSQL_DB="pdns"
+    PDNS_HOME=/etc/pdns
     
 LABEL maintainer="docker-dario@neomediatech.it" \ 
       org.label-schema.version=$VERSION \
@@ -26,11 +21,11 @@ RUN apk --update upgrade && \
         yaml-cpp \
 	pdns pdns-backend-mariadb pdns-tools bash && \
     rm -rf /var/cache/apk/* && \
-    mkdir -p /etc/pdns/conf.d
+    mkdir -p ${PDNS_HOME}/conf.d
 
-ENV PAGER less
+WORKDIR ${PDNS_HOME}
 
-ADD pdns.conf /etc/pdns/
+ADD pdns.conf ${PDNS_HOME}/
 ADD schema.sql docker-entrypoint.sh /
 RUN chmod +x /docker-entrypoint.sh
 
