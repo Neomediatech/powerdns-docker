@@ -12,7 +12,7 @@ setup_backend() {
   local mysql_conf="${HOME}/.my.cnf"
   local mysql_host="${DB_HOST:-db}"
   local mysql_port="${DB_PORT:-3306}"
-  local mysql_user=${DB_USER:-powerdns}
+  local mysql_database=${DB_NAME:-pdns}	
   local mysql_timeout=${MYSQL_TIMEOUT:-10}
   local config_start_marker='# backend'
   local config_end_marker='# eo backend'
