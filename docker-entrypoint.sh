@@ -79,7 +79,6 @@ EOF
   else
     echo "provisioning backend ${mysql_host}"
     mysql -r -s -B < /data/sql/002-pdns-schema.sql
-    mysql -e "GRANT ALL privileges ON `${mysql_database}`.* TO '${mysql_user}'@%; FLUSH PRIVILEGES;"
   fi
 }
 
