@@ -2,6 +2,9 @@
 set -eu
 
 setup_backend() {
+  [ -s "${MYSQL_PASSWORD_FILE}" ] && export DB_PASS="$(cat "${MYSQL_PASSWORD_FILE}")"
+  [ -s "${MYSQL_USER_FILE}" ] && export DB_USER="$(cat "${MYSQL_USER_FILE}")"
+  
   local pdns_conf="${PDNS_HOME}/pdns.conf"
   local mysql_conf="${HOME}/.my.cnf"
   local mysql_host="${DB_HOST:-db}"
