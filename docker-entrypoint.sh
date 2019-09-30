@@ -74,7 +74,7 @@ EOF
     echo "backend ${mysql_host} already provisioned"
   else
     echo "provisioning backend ${mysql_host}"
-    mysql -r -s -B < /usr/share/doc/pdns/schema.mysql.sql
+    mysql -r -s -B < /schema.sql
   fi
 }
 
