@@ -52,8 +52,6 @@ if [ "$MYSQL_AUTOCONF" = "true" ] ; then
   unset -v MYSQL_PASS
 fi
 
-mkdir -p /etc/pdns/conf.d
-
 # Run pdns server
 trap "pdns_control quit" SIGHUP SIGINT SIGTERM
 
