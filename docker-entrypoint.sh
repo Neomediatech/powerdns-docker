@@ -2,16 +2,17 @@
 set -eu
 
 setup_backend() {
-  [ -s "${MYSQL_PASSWORD_FILE}" ] && export DB_PASS="$(cat "${MYSQL_PASSWORD_FILE}")"
-  [ -s "${MYSQL_USER_FILE}" ] && export DB_USER="$(cat "${MYSQL_USER_FILE}")"
+  local mysql_user=${DB_USER:-powerdns}
+  local mysql_password=${DB_PASS:-powerdns}
+
+  [ -s "${MYSQL_PASSWORD_FILE}" ] && local mysql_password="$(cat "${MYSQL_PASSWORD_FILE}")"
+  [ -s "${MYSQL_USER_FILE}" ] && local mysql_user="$(cat "${MYSQL_USER_FILE}")"
   
   local pdns_conf="${PDNS_HOME}/pdns.conf"
   local mysql_conf="${HOME}/.my.cnf"
   local mysql_host="${DB_HOST:-db}"
   local mysql_port="${DB_PORT:-3306}"
   local mysql_user=${DB_USER:-powerdns}
-  local mysql_password=${DB_PASS:-powerdns}
-  local mysql_database=${DB_NAME:-pdns}
   local mysql_timeout=${MYSQL_TIMEOUT:-10}
   local config_start_marker='# backend'
   local config_end_marker='# eo backend'
