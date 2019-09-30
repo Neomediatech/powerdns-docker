@@ -25,7 +25,8 @@ RUN apk --update upgrade && \
         mariadb-client \
         yaml-cpp \
 	pdns pdns-backend-mariadb pdns-tools bash && \
-    rm -rf /var/cache/apk/*
+    rm -rf /var/cache/apk/* && \
+    mkdir -p /etc/pdns/conf.d
 
 ENV PAGER less
 
