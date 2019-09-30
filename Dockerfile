@@ -32,7 +32,7 @@ ENV PAGER less
 
 ADD schema.sql pdns.conf /etc/pdns/
 ADD docker-entrypoint.sh /
-RUN chmod +x /entrypoint.sh
+RUN chmod +x /docker-entrypoint.sh
 
 RUN pdns_server --version || [ $? -eq 99 ]
 
