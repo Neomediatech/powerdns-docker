@@ -1,6 +1,6 @@
-FROM alpine
+FROM alpine:3.10
 
-ENV VERSION=4.1.11 \
+ENV VERSION=4.1.11-r0 \
     BUILD_DATE=2019-08-03 \
     TZ=Europe/Rome \
     PDNS_HOME=/etc/pdns
