@@ -13,7 +13,7 @@ LABEL maintainer="docker-dario@neomediatech.it" \
       org.label-schema.maintainer=Neomediatech
 
 RUN apk --update upgrade && \
-    apk add ca-certificates curl less \
+    apk add ca-certificates curl less tzdata bash \
         boost-program_options \
         openssl \
         mariadb-connector-c libpq \
